@@ -430,6 +430,9 @@ ROUNDSTART_RACES protean
 ROUNDSTART_RACES cursekin
 ROUNDSTART_RACES serpentid
 
+## GS13 RACES DOWN HERE
+ROUNDSTART_RACES slimepersonalt
+
 ##-------------------------------------------------------------------------------------------
 
 ## Roundstart no-reset races

@@ -29,7 +29,7 @@
 			if(human_user.w_uniform && istype(human_user.w_uniform, /obj/item/clothing/under/plasmaman))
 				user.allowed_turfs += "holoseat"
 
-		if(isroundstartslime(user) || isslimeperson(user) || isjellyperson(user))
+		if(isroundstartslime(user) || isroundstartslimealt(user) || isslimeperson(user) || isjellyperson(user)) //GS13 EDIT
 			user.allowed_turfs += "slime"
 
 		if(isxenohybrid(user))

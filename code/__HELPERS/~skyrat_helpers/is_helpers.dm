@@ -7,6 +7,7 @@
 #define isxenohybrid(A) (is_species(A,/datum/species/xeno))
 #define isdwarf(A) (is_species(A,/datum/species/dwarf))
 #define isroundstartslime(A) (is_species(A,/datum/species/jelly/roundstartslime))
+#define isroundstartslimealt(A) (is_species(A,/datum/species/jelly/roundstartslime/alternate)) //GS13 EDIT
 #define istajaran(A) (is_species(A,/datum/species/tajaran))
 #define isghoul(A) (is_species(A,/datum/species/ghoul))
 #define isakula(A) (is_species(A,/datum/species/akula))

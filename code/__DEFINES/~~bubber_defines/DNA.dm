@@ -132,6 +132,7 @@
 #define SPECIES_PODPERSON_WEAK "podweak"
 #define SPECIES_SYNTH "synth"
 #define SPECIES_SLIMESTART "slimeperson"	//There's already SPECIES_SLIMEPERSON in tg
+#define SPECIES_SLIMESTARTALT "slimepersonalt" //GS13 EDIT
 #define SPECIES_SKRELL "skrell"
 #define SPECIES_TAJARAN "tajaran"
 #define SPECIES_UNATHI "unathi"

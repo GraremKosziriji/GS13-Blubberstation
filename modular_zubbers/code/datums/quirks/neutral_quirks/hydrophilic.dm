@@ -9,4 +9,4 @@
 	medical_record_text = "Patient scans indicate extreme hydrophilicity."
 	hardcore_value = 0
 	mob_trait = TRAIT_HYDROPHILIC
-	species_whitelist = list(SPECIES_SLIMESTART)
+	species_whitelist = list(SPECIES_SLIMESTART, SPECIES_SLIMESTARTALT) //GS13 EDIT

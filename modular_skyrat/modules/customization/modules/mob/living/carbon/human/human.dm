@@ -62,6 +62,9 @@
 /mob/living/carbon/human/species/roundstartslime
 	race = /datum/species/jelly/roundstartslime
 
+/mob/living/carbon/human/species/roundstartslimealt //GS13 EDIT
+	race = /datum/species/jelly/roundstartslime/alternate
+
 /mob/living/carbon/human/species/teshari
 	race = /datum/species/teshari
 
