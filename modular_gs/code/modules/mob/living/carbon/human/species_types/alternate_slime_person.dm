@@ -4,7 +4,7 @@
 	name = "Evolved Slimepeople"
 	id = SPECIES_SLIMESTARTALT
 
-	coldmod = 0.25
+	coldmod = 0.5
 	heatmod = 6
 	bodytemp_normal = 297.9
 	bodytemp_heat_damage_limit = 358.15 //Jelly can handle slightly higher temps than people, up to 85c, but will take extreme damage after that point
