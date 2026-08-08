@@ -21,7 +21,7 @@
 		"They are composed of slime jelly, and healed by toxicity.",
 	)
 
-/datum/species/jelly/get_species_lore()
+/datum/species/jelly/roundstartslime/alternate/get_species_lore()
 	return list(
 		"A more evolved form of the slime species created by Nanotrasen's efforts. \
 		These Slimepeople, through their time living in the harsh environments of space have evolved some changes to better adapt them to these conditions. \
