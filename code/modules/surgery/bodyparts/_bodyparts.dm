@@ -1212,14 +1212,18 @@
 		marking.set_appearance(human_owner.dna.features[marking.dna_feature_key], species_color)
 
 	// SKYRAT EDIT ADDITION
+	// GS13 EDIT ADDITION
 	var/datum/species/owner_species = human_owner.dna.species
+	var/transparency_pref = FALSE
+	if (SLIMEPEOPLE_TRANSPARENCY_OVERIDE in human_owner?.dna?.features)
+		transparency_pref = human_owner.dna.features[SLIMEPEOPLE_TRANSPARENCY_OVERIDE]
 
 	if(owner_species && owner_species.specific_alpha != 255)
-		alpha = owner_species.specific_alpha
+		alpha = transparency_pref ? 255 : owner_species.specific_alpha
 
 	// BUBBER EDIT ADDITION START - per-limb alpha.
 	// preference (stored in dna.features) overrides it for this specific zone if present over species alpha
-	limb_alpha = owner_species?.specific_alpha || 255
+	limb_alpha = transparency_pref ? 255 : (owner_species?.specific_alpha || 255)
 	var/limb_alpha_key = "limb_alpha_[body_zone]"
 	if(limb_alpha_key in human_owner.dna.features)
 		limb_alpha = human_owner.dna.features[limb_alpha_key]
@@ -1229,9 +1233,10 @@
 		markings = LAZYCOPY(owner_species.body_markings[body_zone])
 		if(aux_zone && (aux_zone in owner_species.body_markings))
 			aux_zone_markings = LAZYCOPY(owner_species.body_markings[aux_zone])
-		markings_alpha = owner_species.markings_alpha
+		markings_alpha = transparency_pref ? 255 : owner_species.markings_alpha
 	else
 		markings = list()
+	// GS13 EDIT END
 	// SKYRAT EDIT END
 	return TRUE
 
@@ -1448,6 +1453,10 @@
 		override_color = "#888888"
 	// We need to check that the owner exists(could be a placed bodypart) and that it's not a chainsawhand and that they're a human with usable DNA.
 	if(!(bodypart_flags & BODYPART_PSEUDOPART) && (!(bodyshape & BODYSHAPE_TAUR))) // taur legs never ever render
+		// GS13 ADDITION START
+		var/transparency_pref = FALSE
+		if (SLIMEPEOPLE_TRANSPARENCY_OVERIDE in owner?.dna?.features)
+			transparency_pref = owner.dna.features[SLIMEPEOPLE_TRANSPARENCY_OVERIDE]
 		for(var/key in markings) // Cycle through all of our currently selected markings.
 			var/datum/body_marking/body_marking = GLOB.body_markings[key]
 			if (!body_marking) // Edge case prevention.
@@ -1463,7 +1472,7 @@
 			var/mutable_appearance/accessory_overlay
 			var/mutable_appearance/emissive
 			accessory_overlay = mutable_appearance(body_marking.icon, "[body_marking.icon_state]_[render_limb_string][gender_modifier]", -BODYPARTS_LAYER)
-			accessory_overlay.alpha = markings_alpha
+			accessory_overlay.alpha = transparency_pref ? 255 : markings_alpha // GS13 EDIT
 			if(markings[key][2])
 				emissive = emissive_appearance_copy(accessory_overlay, offset_spokesman)
 			if(override_color)
@@ -1485,7 +1494,8 @@
 				var/mutable_appearance/emissive
 				var/mutable_appearance/accessory_overlay
 				accessory_overlay = mutable_appearance(body_marking.icon, "[body_marking.icon_state]_[render_limb_string]", -aux_layer)
-				accessory_overlay.alpha = markings_alpha
+				accessory_overlay.alpha = transparency_pref ? 255 : markings_alpha // GS13 EDIT
+				//GS13 EDIT END
 				if (aux_zone_markings[key][2])
 					emissive = emissive_appearance_copy(accessory_overlay, offset_spokesman)
 				if(override_color)

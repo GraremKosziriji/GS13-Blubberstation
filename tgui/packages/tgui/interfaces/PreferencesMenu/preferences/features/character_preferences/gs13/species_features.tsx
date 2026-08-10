@@ -1,4 +1,4 @@
-import { type Feature, FeatureTextInput } from '../../base';
+import { type Feature, FeatureTextInput, type FeatureToggle, CheckboxInput } from '../../base';
 
 export const ws_rounded: Feature<string> = {
   name: 'Custom Fatness Stage Text (1): Rounded',
@@ -126,3 +126,9 @@ export const ms_mountainous: Feature<string> = {
     'This text will show up when someone examines you when you are at the mountainous muscle stage. If nothing is filled out, the default description will be used',
   component: FeatureTextInput,
 };
+
+export const slimepeople_transparency: FeatureToggle = {
+  name: 'Body Transparency Toggle',
+  description: 'Overides the transparency of transparent species to make them opaque.',
+  component: CheckboxInput,
+}

@@ -71,3 +71,6 @@
 #define BURSTING_TYPE_PREF_CRIT "Crit"
 #define BURSTING_TYPE_PREF_FATAL "Gib and cryo"
 #define BURSTING_TYPE_PREF_PERMA_FATAL "Gib and drop head"
+
+//Visuals
+#define SLIMEPEOPLE_TRANSPARENCY_OVERIDE "slimepeople_transparency_overide"

@@ -1,17 +1,24 @@
 /obj/item/bodypart/head/proc/copy_appearance_from(mob/living/carbon/human/target, overwrite_eyes = FALSE)
 	var/datum/species/target_species = target.dna.species
 
+	// GS13 EDIT ADDITION
+	var/transparency_pref = FALSE
+	if (SLIMEPEOPLE_TRANSPARENCY_OVERIDE in target?.dna?.features)
+		transparency_pref = target.dna.features[SLIMEPEOPLE_TRANSPARENCY_OVERIDE]
+
 	lip_style = target.lip_style
 	lip_color = target.lip_color
 	hairstyle = target.hairstyle
-	hair_alpha = target.hair_alpha || target_species.hair_alpha // BUBBER EDIT - Customization - Original: hair_alpha = target_species.hair_alpha
+	hair_alpha = transparency_pref ? 255 : (target.hair_alpha || target_species.hair_alpha) // BUBBER EDIT & GS13 EDIT - Customization - Original: hair_alpha = target_species.hair_alpha
 	hair_color = target.hair_color
 	facial_hairstyle = target.facial_hairstyle
-	facial_hair_alpha = target_species.facial_hair_alpha
+	facial_hair_alpha = transparency_pref ? 255 : target_species.facial_hair_alpha // GS13 EDIT
 	facial_hair_color = target.facial_hair_color
 	fixed_hair_color = target_species.get_fixed_hair_color(target) //Can be null
 	gradient_styles = LAZYCOPY(target.grad_style)
 	gradient_colors = LAZYCOPY(target.grad_color)
+	// GS13 EDIT END
+
 	var/obj/item/organ/eyes/peepers = locate() in src
 	if(peepers)
 		if(overwrite_eyes || isnull(initial(peepers.eye_color_left)))
@@ -72,17 +79,22 @@
 	var/atom/location = loc || owner || src
 	var/image_dir = dropped ? SOUTH : null
 
+	// GS13 EDIT START
+	var/transparency_pref = FALSE
+	if (SLIMEPEOPLE_TRANSPARENCY_OVERIDE in owner?.dna?.features)
+		transparency_pref = owner.dna.features[SLIMEPEOPLE_TRANSPARENCY_OVERIDE]
+
 	// Overlay
 	var/image/facial_hair_overlay = image(sprite_accessory.icon, sprite_accessory.icon_state, -HAIR_LAYER, dir = image_dir)
-	facial_hair_overlay.alpha = facial_hair_alpha
+	facial_hair_overlay.alpha = transparency_pref ? 255 : facial_hair_alpha // GS13 EDIT
 	set_overlay_hair_color(facial_hair_overlay, facial_hair_color)
 	// Emissive blocker
 	if(blocks_emissive != EMISSIVE_BLOCK_NONE)
-		var/mutable_appearance/em_block = emissive_blocker(facial_hair_overlay.icon, facial_hair_overlay.icon_state, location, alpha = facial_hair_alpha)
+		var/mutable_appearance/em_block = emissive_blocker(facial_hair_overlay.icon, facial_hair_overlay.icon_state, location, alpha = transparency_pref ? 255 : facial_hair_alpha) // GS13 EDIT
 		if (dropped)
 			em_block = image(em_block, dir = SOUTH)
 		facial_hair_overlay.overlays += em_block
-
+	// GS13 EDIT END
 	//Offsets
 	worn_face_offset?.apply_offset(facial_hair_overlay)
 	. += facial_hair_overlay
