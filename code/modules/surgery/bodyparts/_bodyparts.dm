@@ -1219,17 +1219,22 @@
 
 	// BUBBER EDIT ADDITION START - per-limb alpha.
 	// preference (stored in dna.features) overrides it for this specific zone if present over species alpha
+	// GS13 EDIT START - Made it overide the alpha values
 	limb_alpha = owner_species?.specific_alpha || 255
 	var/limb_alpha_key = "limb_alpha_[body_zone]"
+	var/new_marking_alpha = -1
 	if(limb_alpha_key in human_owner.dna.features)
 		limb_alpha = human_owner.dna.features[limb_alpha_key]
+		alpha = human_owner.dna.features[limb_alpha_key]
+		new_marking_alpha = human_owner.dna.features[limb_alpha_key]
 	// BUBBER EDIT ADDITION END
 
 	if(body_zone in owner_species.body_markings)
 		markings = LAZYCOPY(owner_species.body_markings[body_zone])
 		if(aux_zone && (aux_zone in owner_species.body_markings))
 			aux_zone_markings = LAZYCOPY(owner_species.body_markings[aux_zone])
-		markings_alpha = owner_species.markings_alpha
+		markings_alpha = new_marking_alpha == -1 ? owner_species.markings_alpha : new_marking_alpha
+		// GS13 EDIT END
 	else
 		markings = list()
 	// SKYRAT EDIT END
