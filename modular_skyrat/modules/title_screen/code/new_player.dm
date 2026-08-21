@@ -172,6 +172,7 @@
 	var/dat = get_title_html()
 
 	src << browse(SStitle.current_title_screen, "file=loading_screen.gif;display=0")
+	src << browse('config/gs13/gatocat_prog_900px.gif', "display=0")	// GS13 EDIT: adds the gatito progress bar
 	src << browse(dat, "window=title_browser")
 
 /datum/asset/simple/lobby
